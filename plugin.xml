@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-circura-tz-utils" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-circura-tz-utils" version="0.0.3" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>circuraTZ</name>
     <js-module name="circuraTZ" src="www/circuraTZ.js">
         <clobbers target="cordova.plugins.circuraTZ" />
@@ -10,6 +10,7 @@
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="TZPlugin">
                 <param name="android-package" value="com.circura.tzplugin.TZPlugin"/>
+                <param name="onload" value="true" />
             </feature>
         </config-file>
 

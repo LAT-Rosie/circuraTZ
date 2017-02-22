@@ -7,6 +7,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.Date;
+import java.util.TimeZone;
 import android.app.AlarmManager;
 // import android.app.KeyguardManager;
 import android.app.PendingIntent;
@@ -49,9 +50,11 @@ public class TZPlugin extends CordovaPlugin {
 			if ("setTimeZone".equals(action)) {
 				
 				AlarmManager alarmMgr = (AlarmManager)(this.cordova.getActivity().getSystemService(Context.ALARM_SERVICE));
-				alarmMgr.setTimeZone(args.get(0));
+				// alarmMgr.setTimeZone(args.getString(0));
+				String tzStrings[] = TimeZone.getAvailableIDs();
+				alarmMgr.setTimeZone(tzStrings[1]);
 				
-				callbackContext.success("Time Zone set at: " +args.get(0));
+				callbackContext.success("Time Zone set at: " + tzStrings[1]);
 			    return true; 		
 			}
 			return false;		
