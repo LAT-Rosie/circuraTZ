@@ -21,7 +21,15 @@ var tz_controller = {
             "TZPlugin",
             "getTimeZone",
             null
-            // ["firstArgument", "secondArgument", 42, false]);
+        );
+    },
+    getAllTimeZones: function(successCallback, errorCallback) {
+        exec(
+            successCallback,
+            errorCallback,
+            "TZPlugin",
+            "getAllTimeZones",
+            null
         );
     }
 };

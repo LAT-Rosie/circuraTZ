@@ -72,6 +72,10 @@ public class TZPlugin extends CordovaPlugin {
 				callbackContext.success("Default Time Zone: " + currentTZ);
 			    return true; 		
 			}
+			if ("getAllTimeZones".equals(action)) {
+				callbackContext.success(tzStrings);
+			    return true; 		
+			}
 			return false;
 
 		
