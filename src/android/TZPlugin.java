@@ -4,6 +4,8 @@ package com.circura.tzplugin;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.Date;
@@ -23,26 +25,34 @@ import android.util.Log;
 
 public class TZPlugin extends CordovaPlugin {
 
+	String tzStrings[];
 	
-	   @Override
-	    public void onPause(boolean multitasking) {
-	        Log.d("TZPlugin", "onPause");
-	        super.onPause(multitasking);
-	    }
+	@Override
+	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+	    super.initialize(cordova, webView);
+	    // your init code here
+	    tzStrings = TimeZone.getAvailableIDs();
+	}
 
-	    @Override
-	    public void onResume(boolean multitasking) {
-	        Log.d("TZPlugin", "onResume " );
-	        super.onResume(multitasking);
-	        
-	        // PowerManager pm = (PowerManager)this.cordova.getActivity().getSystemService(Context.POWER_SERVICE);
-	        // WakeLock wakeLock = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
-	        // wakeLock.acquire();
-	 
-	        // KeyguardManager keyguardManager = (KeyguardManager) this.cordova.getActivity().getSystemService(Context.KEYGUARD_SERVICE); 
-	        // KeyguardLock keyguardLock =  keyguardManager.newKeyguardLock("TAG");
-	        // keyguardLock.disableKeyguard();
-	    }
+    @Override
+    public void onPause(boolean multitasking) {
+        Log.d("TZPlugin", "onPause");
+        super.onPause(multitasking);
+    }
+
+    @Override
+    public void onResume(boolean multitasking) {
+        Log.d("TZPlugin", "onResume " );
+        super.onResume(multitasking);
+        
+        // PowerManager pm = (PowerManager)this.cordova.getActivity().getSystemService(Context.POWER_SERVICE);
+        // WakeLock wakeLock = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
+        // wakeLock.acquire();
+ 
+        // KeyguardManager keyguardManager = (KeyguardManager) this.cordova.getActivity().getSystemService(Context.KEYGUARD_SERVICE); 
+        // KeyguardLock keyguardLock =  keyguardManager.newKeyguardLock("TAG");
+        // keyguardLock.disableKeyguard();
+    }
 	    
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -51,13 +61,20 @@ public class TZPlugin extends CordovaPlugin {
 				
 				AlarmManager alarmMgr = (AlarmManager)(this.cordova.getActivity().getSystemService(Context.ALARM_SERVICE));
 				// alarmMgr.setTimeZone(args.getString(0));
-				String tzStrings[] = TimeZone.getAvailableIDs();
 				alarmMgr.setTimeZone(tzStrings[1]);
 				
 				callbackContext.success("Time Zone set at: " + tzStrings[1]);
 			    return true; 		
 			}
-			return false;		
+			if ("getTimeZone".equals(action)) {
+				TimeZone tz = TimeZone.getDefault();
+				String currentTZ = tz.getDisplayName (tz.inDaylightTime(new Date()), TimeZone.LONG);				
+				callbackContext.success("Default Time Zone: " + currentTZ);
+			    return true; 		
+			}
+			return false;
+
+		
 		} catch(Exception e) {
 		    System.err.println("Exception: " + e.getMessage());
 		    callbackContext.error(e.getMessage());
