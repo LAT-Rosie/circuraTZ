@@ -73,7 +73,7 @@ public class TZPlugin extends CordovaPlugin {
 			    return true; 		
 			}
 			if ("getAllTimeZones".equals(action)) {
-				callbackContext.success(tzStrings);
+				callbackContext.success(tzStrings.toString());
 			    return true; 		
 			}
 			return false;
