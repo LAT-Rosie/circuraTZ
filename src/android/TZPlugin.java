@@ -21,6 +21,7 @@ import android.content.Intent;
 // import android.os.PowerManager.WakeLock;
 // import android.preference.PreferenceManager;
 import android.util.Log;
+import java.lang.StringBuilder;
 
 
 public class TZPlugin extends CordovaPlugin {
@@ -73,8 +74,18 @@ public class TZPlugin extends CordovaPlugin {
 			    return true; 		
 			}
 			if ("getAllTimeZones".equals(action)) {
-				callbackContext.success(tzStrings.toString());
-			    return true; 		
+				if (tzStrings.length > 0) {
+				    StringBuilder tzBuilder = new StringBuilder();
+
+				    for (String n : name) {
+				        tzBuilder.append("'").append(n.replace("'", "\\'")).append("',");
+				    }
+
+				    tzBuilder.deleteCharAt(tzBuilder.length() - 1);
+
+				callbackContext.success(tzBuilder.toString());
+			    return true;
+			    } 		
 			}
 			return false;
 
