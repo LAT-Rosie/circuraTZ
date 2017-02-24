@@ -61,10 +61,10 @@ public class TZPlugin extends CordovaPlugin {
 			if ("setTimeZone".equals(action)) {
 				
 				AlarmManager alarmMgr = (AlarmManager)(this.cordova.getActivity().getSystemService(Context.ALARM_SERVICE));
-				// alarmMgr.setTimeZone(args.getString(0));
-				alarmMgr.setTimeZone(tzStrings[145]);
+				alarmMgr.setTimeZone(args.getString(0));
+				// alarmMgr.setTimeZone(tzStrings[145]); // Pacific
 				
-				callbackContext.success("Time Zone set at: " + tzStrings[145]);
+				callbackContext.success("Time Zone set at: " + args.getString(0));
 			    return true; 		
 			}
 			if ("getTimeZone".equals(action)) {
