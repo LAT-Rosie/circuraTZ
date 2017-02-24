@@ -77,7 +77,7 @@ public class TZPlugin extends CordovaPlugin {
 				if (tzStrings.length > 0) {
 				    StringBuilder tzBuilder = new StringBuilder();
 
-				    for (String n : name) {
+				    for (String n : tzStrings) {
 				        tzBuilder.append("'").append(n.replace("'", "\\'")).append("',");
 				    }
 
