@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-circuraTZ",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "cordova-plugin-circuraTZ",
+    "platforms": [
+      "android"
+    ]
+  },
+  "description": "A Cordova Plugin for Time Zones specific to Circura"
+}

@@ -1,6 +1,8 @@
 var exec = require('cordova/exec');
 
-var tz_controller = {
+var PLUGIN_NAME = 'circuraTZ';
+
+var circuraTZ = {
     setTimeZone: function(tzString, successCallback, errorCallback) {
         if(tzString === null)
     		return;
@@ -8,7 +10,7 @@ var tz_controller = {
         exec(
             successCallback,
             errorCallback,
-            "TZPlugin",
+            PLUGIN_NAME,
             "setTimeZone",
             [tzString]
             // ["firstArgument", "secondArgument", 42, false]);
@@ -18,7 +20,7 @@ var tz_controller = {
         exec(
             successCallback,
             errorCallback,
-            "TZPlugin",
+            PLUGIN_NAME,
             "getTimeZone",
             null
         );
@@ -27,10 +29,11 @@ var tz_controller = {
         exec(
             successCallback,
             errorCallback,
-            "TZPlugin",
+            PLUGIN_NAME,
             "getAllTimeZones",
             null
         );
     }
 };
-module.exports = tz_controller;
+module.exports = circuraTZ;
+
