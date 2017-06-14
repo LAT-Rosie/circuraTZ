@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-plugin-circuraTZ"
-    version="0.0.6">
-    <name>Circura Time Zone Plugin</name>
+    id="circura-timezone"
+    version="1.0.0">
+    <name>Circura TimeZone Plugin</name>
     <description></description>
-    <license></license>
+    <license>LAT</license>
     <keywords></keywords>
     <repo>https://github.com/LAT-Rosie/circuraTZ.git</repo>
     <issue>https://github.com/LAT-Rosie/circuraTZ/issues</issue>
 
     <!-- android -->
     <platform name="android">
-      <js-module name="circuraTZ" src="www/circuraTZ.js">
-        <!-- This is the window variable name you want, like window.circuraTZ -->
-        <clobbers target="circuraTZ" />
+      <js-module src="www/circuraTZ.js" name="plugin">
         <runs/>
+
+        <!-- This is the window variable name you want, like window.CircuraTZ -->
+        <clobbers target="CircuraTZ" />
       </js-module>
       <config-file target="res/xml/config.xml" parent="/*">
-        <feature name="CircuraTZPlugin">
-          <param name="android-package" value="com.circura.TZPlugin" />
+        <feature name="CircuraTZ">
+          <param name="android-package" value="com.circura.CircuraTZ" />
           <param name="onload" value="true" />
         </feature>
       </config-file>
-      <config-file target="AndroidManifest.xml" parent="/manifest">
-          <uses-permission android:name="android.permission.SET_TIME_ZONE"/>
-      </config-file>
-      <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
-          <intent-filter>
-              <action android:name="com.circura.TIMEZONE" />
-              <category android:name="android.intent.category.DEFAULT" />
-          </intent-filter>
-      </config-file>
-      <source-file src="src/android/com/circura/TZPlugin.java" target-dir="src/com/circura/" />      
+
+      <source-file src="src/android/com/circura/CircuraTZ.java" target-dir="src/com/circura/" />
     </platform>
 </plugin>

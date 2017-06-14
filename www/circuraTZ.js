@@ -1,12 +1,13 @@
+
 var exec = require('cordova/exec');
 
-var PLUGIN_NAME = 'circuraTZ';
+var PLUGIN_NAME = 'CircuraTZ';
 
-var circuraTZ = {
+var CircuraTZ = {
     setTimeZone: function(tzString, successCallback, errorCallback) {
         if(tzString === null)
-    		return;
-    	
+            return;
+        
         exec(
             successCallback,
             errorCallback,
@@ -22,7 +23,7 @@ var circuraTZ = {
             errorCallback,
             PLUGIN_NAME,
             "getTimeZone",
-            null
+            []
         );
     },
     getAllTimeZones: function(successCallback, errorCallback) {
@@ -31,9 +32,9 @@ var circuraTZ = {
             errorCallback,
             PLUGIN_NAME,
             "getAllTimeZones",
-            null
+            []
         );
     }
 };
-module.exports = circuraTZ;
 
+module.exports = CircuraTZ;
