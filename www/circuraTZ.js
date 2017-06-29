@@ -14,7 +14,18 @@ var CircuraTZ = {
             PLUGIN_NAME,
             "setTimeZone",
             [tzString]
-            // ["firstArgument", "secondArgument", 42, false]);
+        );
+    },
+    setTimeZoneByOffset: function(tzInt, successCallback, errorCallback) {
+        if(tzInt === null)
+            return;
+        
+        exec(
+            successCallback,
+            errorCallback,
+            PLUGIN_NAME,
+            "setTimeZoneByOffset",
+            [tzInt]
         );
     },
     getTimeZone: function(successCallback, errorCallback) {
