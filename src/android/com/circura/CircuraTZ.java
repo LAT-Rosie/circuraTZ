@@ -25,6 +25,7 @@ public class CircuraTZ extends CordovaPlugin {
 
     StringBuilder tzBuilder;
     String tzStrings[];
+    Integer mOffset = 100; // Only works with setTimeZoneByOffset()
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -65,6 +66,10 @@ public class CircuraTZ extends CordovaPlugin {
                 // Expecting signed integers in the range [-12, +14]
                 try {
                     offset = new Integer(args.getInt(0));
+                    // If the offset is the same, exit
+                    if (offset == mOffset) {
+                        return true;
+                    }
                     if ((offset < -12) || (offset > 14)) {
                         throw (new Exception("Time Zone offset out of range: " + args.getString(0)) );
                     }
@@ -77,6 +82,7 @@ public class CircuraTZ extends CordovaPlugin {
                         posix_offset = "+0";
                     }
                     alarmMgr.setTimeZone("Etc/GMT" + posix_offset);
+                    mOffset = offset;
                 } catch ( NumberFormatException nfe ) {
                     throw (nfe);
                 }
